@@ -1,0 +1,152 @@
+@api=https://taz.harding.edu/api
+
+@token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImUxYjkzYzY0MDE0NGI4NGJkMDViZjI5NmQ2NzI2MmI2YmM2MWE0ODciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI5MjMxNjcxMzM0MjgtbmZzamdqcTgycDRncXFvY2E1aHRmcWdzbG1iaTZ1djkuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI5MjMxNjcxMzM0MjgtbmZzamdqcTgycDRncXFvY2E1aHRmcWdzbG1iaTZ1djkuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTIxODE5Njg5ODMzNjY5NjkzMzkiLCJoZCI6ImhhcmRpbmcuZWR1IiwiZW1haWwiOiJkbGFpbmV6MUBoYXJkaW5nLmVkdSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJub25jZSI6IjQ2OTIwZTU1LWYyYmYtNDczMS05NmI3LTA2NGI2MzQ4YmViMyIsIm5iZiI6MTcxNDUxMzY0NiwibmFtZSI6IkRhdmlkIExhaW5leiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NJNTYtVEFoMDhGWUJ3WEVlc2lzczAzVUY4ampEZ3A4NXF4anZJeDFhX0lqVWJwcVJzPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkRhdmlkIiwiZmFtaWx5X25hbWUiOiJMYWluZXoiLCJpYXQiOjE3MTQ1MTM5NDYsImV4cCI6MTcxNDUxNzU0NiwianRpIjoiZTRmZDBiMDViNTJhMTNlODg4ODMyMDNhZmQ1ZTc3ODkxOGJhNjBjYiJ9.OZ5yyq7lG_CsvEi1DHSH_LOLB-5pboIJbDzonl9H20EJ8KSoO-XgIVo-9-HCRoQg5p60cVVLQ5ZS1tiBv0gL74vRKwIeq-4eDSek4XlZz5FWbK9U7RpbZRyZiDZCJwBIDvyg-fdygiHqPC5KksLiGwzy2fOvprne3n9tkffURQwL3x3q6ecf0kMLgLT0JCaJ4IUlLCPRaEr9LhQbpr8c7hM3ZXbwsSyepZaj396eagVm-ITvkf4dTYuEpXALCaF6VHYPpfkdlsnkjqw6kKfT4_e0u5bXX4beYXpXbc5adj_fz3H1czChmLX8NyCCn0PHXIybOypTtaMl3h3FUZQf5w
+
+// used for any endpoints that contain a question id
+@questionid=id-of-question
+
+// used for any endpoints that contain an answer id
+@answerid=id-of-answer
+
+// used for like endpoints
+@postid=id-of-question-or-answer
+
+// used for like endpoints
+@user=dlainez1
+
+###
+# GET USER INFO
+GET {{api}}/user
+Authorization: Bearer {{token}}
+
+
+############################################################
+#                         QUESTIONS
+############################################################
+
+###
+# GET ALL QUESTIONS
+GET {{api}}/questions?start=1
+Authorization: Bearer {{token}}
+
+
+###
+# GET ONE QUESTION
+GET {{api}}/questions/{{questionid}}
+Authorization: Bearer {{token}}
+
+
+###
+# CREATE QUESTION
+POST {{api}}/questions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "author": "dlainez1",
+  "summary": "I'm cooked",
+  "contents": "I was lazy and just used the default question!"
+}
+
+
+###
+# UPDATE QUESTION
+PUT {{api}}/questions/{{questionid}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "summary": "How lazy can you get?",
+  "contents": "I'm still using the default question!"
+}
+
+
+###
+# DELETE QUESTION
+DELETE {{api}}/questions/{{questionid}}
+Authorization: Bearer {{token}}
+
+
+###
+# RESTORE QUESTION
+POST {{api}}/questions/{{questionid}}
+Authorization: Bearer {{token}}
+
+
+############################################################
+#                          ANSWERS
+############################################################
+
+###
+# GET ALL ANSWERS
+GET {{api}}/questions/{{questionid}}/answers?start=1
+Authorization: Bearer {{token}}
+
+
+###
+# GET ONE ANSWER
+GET {{api}}/answers/{{answerid}}
+Authorization: Bearer {{token}}
+
+
+###
+# CREATE ANSWER
+POST {{api}}/questions/{{questionid}}/answers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "author": "gfoust",
+  "contents": "I was lazy and just used the default answer!"
+}
+
+
+###
+# UPDATE ANSWER
+PUT {{api}}/answers/{{answerid}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contents": "I'm still using the default answer!"
+}
+
+
+###
+# DELETE ANSWER
+DELETE {{api}}/answers/{{answerid}}
+Authorization: Bearer {{token}}
+
+
+###
+# RESTORE ANSWER
+POST {{api}}/answers/{{answerid}}
+Authorization: Bearer {{token}}
+
+
+############################################################
+#                           LIKES
+############################################################
+
+###
+# GET ALL LIKES
+GET {{api}}/likes/{{postid}}
+Authorization: Bearer {{token}}
+
+
+###
+# GET ONE LIKE
+GET {{api}}/likes/{{postid}}/{{user}}
+Authorization: Bearer {{token}}
+
+
+###
+# CREATE LIKE
+POST {{api}}/likes/{{postid}}/{{user}}
+Authorization: Bearer {{token}}
+
+
+###
+# DELETE LIKE
+DELETE {{api}}/likes/{{postid}}/{{user}}
+Authorization: Bearer {{token}}
