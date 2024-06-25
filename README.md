@@ -1,0 +1,1 @@
+Este es un proyecto de mi clase de desarrollo web, en el que, usando una API de mi profesor, realizamos la UI de una supuesta red social, poniendo en práctica nuestros conocimientos en HTML, JavaScript, CSS, Node.js y React.
